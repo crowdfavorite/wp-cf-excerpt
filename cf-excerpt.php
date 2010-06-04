@@ -1,11 +1,13 @@
 <?php
 /*
-Plugin Name: CF Nice Excerpts
-Description: Helpful excerpt functions, like "&hellip;" truncation, custom lengths, etc.
-Version: 1.0
-Author: Crowd Favorite
-Author URI: http://crowdfavorite.com
-*/
+ * Plugin Name: CF Nice Excerpts
+ * Description: Helpful excerpt functions, like "&hellip;" truncation, custom lengths, etc.
+ * Version: 1.0
+ * Author: Crowd Favorite
+ * Author URI: http://crowdfavorite.com
+ */
+
+if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
 
 function cfex_excerpt_more() {
 	return '&hellip;';
