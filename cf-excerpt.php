@@ -9,6 +9,10 @@
 
 if (__FILE__ == $_SERVER['SCRIPT_FILENAME']) { die(); }
 
+/**
+ * Get rid of ugly [...]
+ * Replace with typographically correct &hellip;
+ */
 function cfex_excerpt_more() {
 	return '&hellip;';
 }
