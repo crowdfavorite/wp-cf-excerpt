@@ -23,17 +23,31 @@ add_filter('excerpt_more', 'cfex_excerpt_more');
  * @uses cfex_seriously_trim_the_excerpt
  * @param $num defines the number of words the excerpt is truncated to, to the nearest space.
  */
-function cfex_the_excerpt($length = 55) {
+function cfex_get_excerpt($length = 55, $more = '&hellip;') {
 	$length_func = create_function('$length', "return $length;");
+	$trunc_func = create_function('$more', "return '$more';");
+	
+	ob_start();
 	
 	// Custom excerpt length through our on-the-fly function.
 	add_filter('excerpt_length', $length_func);
+	// Custom truncation character
+	add_filter('excerpt_more', $trunc_func);
 	// Serious truncation we can count on.
 	add_filter('wp_trim_excerpt', 'cfex_seriously_trim_the_excerpt', 10, 2);
 		the_excerpt();
-	// Remove both for safety's sake.
+	// Remove all filters for safety's sake.
 	remove_filter('wp_trim_excerpt', 'cfex_seriously_trim_the_excerpt');
+	remove_filter('excerpt_more', $trunc_func);
 	remove_filter('excerpt_length', $length_func);
+	
+	$excerpt = ob_get_clean();
+	
+	return $excerpt;
+}
+
+function cfex_the_excerpt($length = 55, $more = '&hellip;') {
+	echo cfex_get_excerpt($length, $more);
 }
 
 /**
