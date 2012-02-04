@@ -1,4 +1,0 @@
-# CF Email This
-
-## 1.0
-Initial Release
